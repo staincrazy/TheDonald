@@ -14,11 +14,11 @@ opts = ChromeOptions()
 opts.add_experimental_option("detach", True)
 
 
-def russia_test():
+def collusion_test():
     driver = webdriver.Chrome(test_data.driver_path, chrome_options=opts)
     driver.get(test_data.archive_url)
     driver.maximize_window()
-    driver.find_element_by_xpath(test_data.archive_searchbox).send_keys(test_data.russia)
+    driver.find_element_by_xpath(test_data.archive_searchbox).send_keys(test_data.collusion)
     time.sleep(10)
     results = driver.find_element_by_xpath(".//span[@class='results___1pfEc']")
     n_max = int(results.text)
@@ -36,4 +36,4 @@ def russia_test():
 
 
 if __name__ == "__main__":
-    russia_test()
+    collusion_test()

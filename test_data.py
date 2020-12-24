@@ -1,6 +1,7 @@
 url = "https://twitter.com/realDonaldTrump"
 obama = "Obama"
 russia = "Russia"
+collusion = "Collusion"
 enemy = "Obama!"
 archive_url = "https://www.thetrumparchive.com/"
 archive_searchbox = ".//input[@aria-label='searchbox']"
