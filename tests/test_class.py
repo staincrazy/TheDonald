@@ -6,7 +6,6 @@ from selenium.webdriver import ChromeOptions, ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-import pytest
 
 import test_data
 
@@ -14,7 +13,6 @@ opts = ChromeOptions()
 opts.add_experimental_option("detach", True)
 
 
-@pytest.mark.usefixtures("setup_Chrome")
 class TestClass:
 
     def __init__(self):
