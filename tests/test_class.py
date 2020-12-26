@@ -30,7 +30,7 @@ class TestClass:
         print("performing login")
         assert self.driver.find_element_by_xpath(test_data.twetter_name).is_displayed()
 
-    # Takes the keyword that is passed from test execution and performs search
+    # Takes the keyword that is passed when class and method is called, and performs search
 
     def test_enemy(self, keyword):
 
@@ -61,6 +61,7 @@ class TestClass:
 
             except TimeoutException as e:
                 print("Timeout exception on the element: " + str(n))
+                self.driver.find_element_by_xpath(".//body").send_keys(Keys.PAGE_DOWN)
 
             # here we check if enemy's name is presented in each tweet
             # and if so we try to click "Show" button to open original tweet
@@ -94,6 +95,6 @@ if __name__ == "__main__":
     test = TestClass()
     test.test_navigation()
     test.test_enemy(test_data.both_words)
-    # test.test_enemy(test_data.russia)
-    # test.test_enemy(test_data.collusion)
+    test.test_enemy(test_data.russia)
+    test.test_enemy(test_data.collusion)
     test.tear_down()
