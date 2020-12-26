@@ -6,25 +6,25 @@ Technologies used : PyCharm Comm Edition, Python, Selenium WebDriver
 
 Project structure is very simple. All the tests are run from test_class.py, all test data contains in test_data.py
 
-How it works:
+# How it works:
 
-# Initiates chrome driver in def __init__ function
-# Navigate to url and verifies if the navigation is successful in def test_navigation function
-# Takes the keyword that is passed when class and method is called, and performs search, stores search results in special variable and starts parsing
+Initiates chrome driver in def __init__ function
+Navigate to url and verifies if the navigation is successful in def test_navigation function
+Takes the keyword that is passed when class and method is called, and performs search, stores search results in special variable and starts parsing
 all the tweets. While paring it verifies if each tweet contains speical keyword, and, if so, clicks "Show" button for the tweet and takes the screenshot of it.
 All done in def test_enemy function
 
 
-How to run:
+# How to run:
 
-# Donwload the project 
-# Adjust webdriver path in test_data.py file
-# Call TestClass directly from tes_class.py and specify all required functions
-# Run it
+Donwload the project 
+Adjust webdriver path in test_data.py file
+Call TestClass directly from tes_class.py and specify all required functions
+Run it
 
-Additional information:
+# Additional information:
 
-# During automation process i've faced some issues with opening additional windown and going back and forth to original Twitter website. And, as far as current 
+During automation process i've faced some issues with opening additional windown and going back and forth to original Twitter website. And, as far as current 
 archive implementation allows to open original tweet text right there, decided to use this functionality for completing the task
 
 
