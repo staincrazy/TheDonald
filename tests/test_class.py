@@ -6,8 +6,9 @@ from selenium.webdriver import ChromeOptions, ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-
 import test_data
+
+# This setting helps not to close Chrome before the test executes
 
 opts = ChromeOptions()
 opts.add_experimental_option("detach", True)
@@ -15,29 +16,42 @@ opts.add_experimental_option("detach", True)
 
 class TestClass:
 
+    # Initiates chrome driver
+
     def __init__(self):
         print("initiating chrome driver")
-        self.driver = webdriver.Chrome("/Users/reonoldpetrenko/PycharmProjects/TheDonald/chromedriver")
+        self.driver = webdriver.Chrome(test_data.driver_path)
         self.driver.get(test_data.archive_url)
         self.driver.maximize_window()
 
+    # Navigate to url and verifies if the navigation is successful
+
     def test_navigation(self):
         print("performing login")
-        assert self.driver.find_element_by_xpath(".//*[text()='Trump Twitter Archive ']").is_displayed()
+        assert self.driver.find_element_by_xpath(test_data.twetter_name).is_displayed()
+
+    # Takes the keyword that is passed from test execution and performs search
 
     def test_enemy(self, keyword):
 
         print("performing test for the keyword " + keyword)
-        actions = ActionChains(self.driver)
+
         self.driver.find_element_by_xpath(test_data.archive_searchbox).clear()
         self.driver.find_element_by_xpath(test_data.archive_searchbox).send_keys(keyword)
+
         time.sleep(5)
-        results = self.driver.find_element_by_xpath(".//span[@class='results___1pfEc']")
+
+        # results variable is used to store search results and convert it to integer
+
+        results = self.driver.find_element_by_xpath(test_data.results_on_the_page)
         n_max = int(results.text)
 
-        # self.driver.find_element_by_xpath(".//body").send_keys(Keys.PAGE_DOWN)
+        # n variable is used for proper xpath. when several elements on the page have the same xpath they can be
+        # parsed using special counter (e.g. [1], [2], [3]....)
 
         n = 1
+
+        # now we parse through tweets on the page from 1 to results using while cycle
 
         while n < n_max:
             try:
@@ -47,6 +61,10 @@ class TestClass:
 
             except TimeoutException as e:
                 print("Timeout exception on the element: " + str(n))
+
+            # here we check if enemy's name is presented in each tweet
+            # and if so we try to click "Show" button to open original tweet
+            # and make a screenshot of it with the name of "keyword + n(tweet number)"
 
             if test_data.enemy in tweet.text:
 
@@ -69,6 +87,8 @@ class TestClass:
     def tear_down(self):
         self.driver.close()
 
+
+# here we call our test method and call particular functions
 
 if __name__ == "__main__":
     test = TestClass()
